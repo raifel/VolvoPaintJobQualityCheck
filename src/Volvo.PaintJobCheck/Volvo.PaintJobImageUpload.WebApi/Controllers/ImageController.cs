@@ -5,7 +5,7 @@ using System;
 using System.IO;
 using System.Threading.Tasks;
 
-namespace Volvo.VolvoPaintJobImageUpload.WebApi.Controllers
+namespace Volvo.PaintJobCheck.WebApi.Controllers
 {
     [Produces("application/json")]
     [Route("api/Image")]
