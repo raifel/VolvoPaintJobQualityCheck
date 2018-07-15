@@ -6,7 +6,7 @@ namespace Volvo.VolvoPaintJobImageUpload.PictureUpload
 {
     internal class ApiService : IApiService
     {
-        private string url = "http://localhost:3574/api/image";
+        private string url = "http://localhost:3573/api/image";
 
         public async Task<bool> UploadImageAsync(Stream image,  string fileName, bool reference=true, string batchNumber="sdf", int serialNo=1)
         {

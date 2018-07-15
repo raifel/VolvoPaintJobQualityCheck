@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.WindowsAzure.Storage;
+using Microsoft.WindowsAzure.Storage.Blob;
 using System;
 using System.IO;
 using System.Threading.Tasks;
@@ -13,6 +15,7 @@ namespace Volvo.PaintJobCheck.WebApi.Controllers
     {
         private readonly IHostingEnvironment _environment;
 
+
         public ImageController(IHostingEnvironment environment)
         {
             _environment = environment ?? throw new ArgumentNullException(nameof(environment));
@@ -22,22 +25,45 @@ namespace Volvo.PaintJobCheck.WebApi.Controllers
         [HttpPost]
         public async Task Post(IFormFile file)
         {
-            if (string.IsNullOrWhiteSpace(_environment.WebRootPath))
+
+            CloudStorageAccount storageAccount = null;
+            CloudBlobContainer cloudBlobContainer = null;
+
+            string storageConnectionString = "DefaultEndpointsProtocol=https;AccountName=paintcheckimages;AccountKey=qhuiRPu8Dr0ZKQzz6f68I+H2kIX+TRlNKfUWQLZDJx64KJR+Nck143VjsTLESA9UMzZc1X+hFY033vTynXAMWg==;EndpointSuffix=core.windows.net";
+
+            if (CloudStorageAccount.TryParse(storageConnectionString, out storageAccount))
             {
-                _environment.WebRootPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot");
-            }
-
-            var uploads = Path.Combine(_environment.WebRootPath, "uploads");
-
-            if (!Directory.Exists(uploads)) Directory.CreateDirectory(uploads);
-
-            if (file.Length > 0)
-            {
-                using (var fileStream = new FileStream(Path.Combine(uploads, file.FileName), FileMode.Create))
+                try
                 {
-                    await file.CopyToAsync(fileStream);
+                    CloudBlobClient cloudBlobClient = storageAccount.CreateCloudBlobClient();
+                    cloudBlobContainer = cloudBlobClient.GetContainerReference("paintjobimages");
+                    BlobContainerPermissions permissions = new BlobContainerPermissions
+                    {
+                        PublicAccess = BlobContainerPublicAccessType.Blob
+                    };
+                    await cloudBlobContainer.SetPermissionsAsync(permissions);
+
+                    var directory = cloudBlobContainer.GetDirectoryReference(file.Headers["batchnumber"]);
+                    CloudBlockBlob blockBlob = directory.GetBlockBlobReference(file.Headers["serialNo"]+".jpg");
+                    await blockBlob.UploadFromStreamAsync(file.OpenReadStream());
+
                 }
+                catch (StorageException ex)
+                {
+                    Console.WriteLine("Error returned from the service: {0}", ex.Message);
+                }
+
             }
+            else
+            {
+
+            }
+        }
+
+
+        private static async Task ProcessAsync()
+        {
+            
         }
     }
 }
