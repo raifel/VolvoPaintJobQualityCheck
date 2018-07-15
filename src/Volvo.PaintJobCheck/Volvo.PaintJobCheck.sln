@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ImageUploadTest", "ImageUpl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VolvoPaintJobCheck.App", "Volvo.PaintJobCheck.App\VolvoPaintJobCheck.App.csproj", "{EF14197A-6C3D-46AF-9F1A-A13769267580}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Volov.PaintJobCheck.ImageProcessing", "Volov.PaintJobCheck.ImageProcessing\Volov.PaintJobCheck.ImageProcessing.csproj", "{FBE5744D-E351-4D3E-B5DB-8CB6233D8ADA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -77,6 +79,22 @@ Global
 		{EF14197A-6C3D-46AF-9F1A-A13769267580}.Release|x86.ActiveCfg = Release|Any CPU
 		{EF14197A-6C3D-46AF-9F1A-A13769267580}.Release|x86.Build.0 = Release|Any CPU
 		{EF14197A-6C3D-46AF-9F1A-A13769267580}.Release|x86.Deploy.0 = Release|Any CPU
+		{FBE5744D-E351-4D3E-B5DB-8CB6233D8ADA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FBE5744D-E351-4D3E-B5DB-8CB6233D8ADA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FBE5744D-E351-4D3E-B5DB-8CB6233D8ADA}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{FBE5744D-E351-4D3E-B5DB-8CB6233D8ADA}.Debug|ARM.Build.0 = Debug|Any CPU
+		{FBE5744D-E351-4D3E-B5DB-8CB6233D8ADA}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{FBE5744D-E351-4D3E-B5DB-8CB6233D8ADA}.Debug|x64.Build.0 = Debug|Any CPU
+		{FBE5744D-E351-4D3E-B5DB-8CB6233D8ADA}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{FBE5744D-E351-4D3E-B5DB-8CB6233D8ADA}.Debug|x86.Build.0 = Debug|Any CPU
+		{FBE5744D-E351-4D3E-B5DB-8CB6233D8ADA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FBE5744D-E351-4D3E-B5DB-8CB6233D8ADA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FBE5744D-E351-4D3E-B5DB-8CB6233D8ADA}.Release|ARM.ActiveCfg = Release|Any CPU
+		{FBE5744D-E351-4D3E-B5DB-8CB6233D8ADA}.Release|ARM.Build.0 = Release|Any CPU
+		{FBE5744D-E351-4D3E-B5DB-8CB6233D8ADA}.Release|x64.ActiveCfg = Release|Any CPU
+		{FBE5744D-E351-4D3E-B5DB-8CB6233D8ADA}.Release|x64.Build.0 = Release|Any CPU
+		{FBE5744D-E351-4D3E-B5DB-8CB6233D8ADA}.Release|x86.ActiveCfg = Release|Any CPU
+		{FBE5744D-E351-4D3E-B5DB-8CB6233D8ADA}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
