@@ -10,9 +10,11 @@ namespace ImageUploadTest
         {
 
             var filestream = File.OpenRead(@"C:\Users\a036540\Desktop\Shyamasundara Kudkuli.jpg");
+            var filestream2 = File.OpenRead(@"C:\Users\a036540\Desktop\Shyamasundara Kudkuli.jpg");
             ApiService ap = new ApiService();
-            ap.UploadImageAsync(filestream, "shyam.jpg").Wait();
-
+           var m= ap.UploadImageAsync(filestream, DateTime.Now.Ticks.ToString() + ".jpg").Result;
+            ApiService ap2 = new ApiService();
+           var x=  ap2.UploadImageAsync(filestream2, DateTime.Now.Ticks.ToString() + ".jpg").Result; 
         }
     }
 }

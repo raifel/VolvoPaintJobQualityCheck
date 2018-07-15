@@ -32,5 +32,7 @@ namespace CameraAppDemo
 
             return resizedBitmap;
         }
+
+       
     }
 }

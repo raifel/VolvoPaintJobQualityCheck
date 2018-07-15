@@ -5,6 +5,6 @@ namespace Volvo.VolvoPaintJobImageUpload.PictureUpload
 {
     public interface IApiService
     {
-        Task<bool> UploadImageAsync(Stream image, string fileName);
+        Task<bool> UploadImageAsync(Stream image, string fileName, bool reference, string batchNumber, int serialNo);
     }
 }

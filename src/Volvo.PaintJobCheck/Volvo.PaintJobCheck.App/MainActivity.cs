@@ -9,6 +9,7 @@ namespace CameraAppDemo
     using Android.OS;
     using Android.Provider;
     using Android.Widget;
+    using IC6.Xamarin.PictureUpload;
     using Java.IO;
     using Environment = Android.OS.Environment;
     using Uri = Android.Net.Uri;
@@ -88,12 +89,45 @@ namespace CameraAppDemo
                 _imageView = FindViewById<ImageView>(Resource.Id.imageView1);
                 _imageView2 = FindViewById<ImageView>(Resource.Id.imageView2);
                 button.Click += TakeAPicture;
+                Button analyze = FindViewById<Button>(Resource.Id.button1);
+                analyze.Click += Analyze_Click;
+
             }
 
         }
 
+        private void Analyze_Click(object sender, EventArgs e)
+        {
+            CheckBox checkBoxReference = FindViewById<CheckBox>(Resource.Id.checkBoxReference);
+            try
+            {
+                var batch = "reference";
+                if (checkBoxReference.Checked == false)
+                {
+                    batch = DateTime.Now.Ticks.ToString();
+                }
+                var filestream = System.IO.File.OpenRead(App._file.AbsolutePath);
+                ApiService ap = new ApiService();
+                var x = ap.UploadImageAsync(filestream, "front.jpg", checkBoxReference.Checked, batch, 1);
+
+                var filestream2 = System.IO.File.OpenRead(App._file2.AbsolutePath);
+                ApiService ap2 = new ApiService();
+                var m = ap2.UploadImageAsync(filestream2, "side.jpg", checkBoxReference.Checked, batch, 2);
+
+                var message = "Images are uploaded sucussfully. Wait for result";
+                Toast.MakeText(ApplicationContext, message, ToastLength.Long).Show();
+
+
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.Message);
+            }
+        }
+
         private void CreateDirectoryForPictures()
         {
+            //Intent intent = new Intent();
             App._dir = new File(
                 Environment.GetExternalStoragePublicDirectory(
                     Environment.DirectoryPictures), "VolvoPaintJobChecks");
@@ -101,6 +135,7 @@ namespace CameraAppDemo
             {
                 App._dir.Mkdirs();
             }
+           
         }
 
         private bool IsThereAnAppToTakePictures()

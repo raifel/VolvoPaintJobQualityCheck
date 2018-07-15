@@ -17,13 +17,13 @@
       }
     },
     "IC6.Xamarin.WebApi": {
-      "commandName": "Project",
-      "launchBrowser": true,
-      "launchUrl": "api/values",
-      "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
-      },
-      "applicationUrl": "http://localhost:3574/"
+        "commandName": "Project",
+        "launchBrowser": true,
+        "launchUrl": "api/values",
+        "environmentVariables": {
+            "ASPNETCORE_ENVIRONMENT": "Development"
+        },
+        "applicationUrl": "http://localhost:3575/"
     }
   }
 }
