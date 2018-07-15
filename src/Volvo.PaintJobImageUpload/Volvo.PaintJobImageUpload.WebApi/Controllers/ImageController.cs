@@ -1,9 +1,13 @@
-﻿using Microsoft.AspNetCore.Hosting;
+﻿using ImageMagick;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.WindowsAzure.Storage;
+using Microsoft.WindowsAzure.Storage.Blob;
 using System;
 using System.IO;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace Volvo.VolvoPaintJobImageUpload.WebApi.Controllers
 {
@@ -18,24 +22,52 @@ namespace Volvo.VolvoPaintJobImageUpload.WebApi.Controllers
             _environment = environment ?? throw new ArgumentNullException(nameof(environment));
         }
 
+        private async void uploadBlob(IFormFile file,CloudBlobClient cloudBlobClient,string containername)
+        {
+            CloudBlobContainer cloudBlobContainer = null;
+            cloudBlobContainer = cloudBlobClient.GetContainerReference(containername);
+            await cloudBlobContainer.CreateIfNotExistsAsync();
+
+            BlobContainerPermissions permissions = new BlobContainerPermissions
+            {
+                PublicAccess = BlobContainerPublicAccessType.Blob
+            };
+            await cloudBlobContainer.SetPermissionsAsync(permissions);
+            BlobContinuationToken blobContinuationToken = null;
+            var results = await cloudBlobContainer.ListBlobsSegmentedAsync(null, blobContinuationToken);
+            if (results.Results.Count() < 2)
+            {
+                MemoryStream memoryStream = new MemoryStream();
+                // file.CopyTo(memoryStream);
+                MagickImage image = new MagickImage(file.OpenReadStream());
+                image.AutoOrient();
+                await memoryStream.WriteAsync(image.ToByteArray(), 0, image.ToByteArray().Count());
+                memoryStream.Position = 0;
+                var cloudBlockBlob = cloudBlobContainer.GetBlockBlobReference(file.FileName);
+                await cloudBlockBlob.UploadFromStreamAsync(memoryStream);
+            }
+            else
+            {
+                await cloudBlobContainer.DeleteIfExistsAsync();
+            }
+        }
         // POST: api/Image
         [HttpPost]
-        public async Task Post(IFormFile file)
+        public async Task Post(IFormFile file, bool isReference, string jobId)
         {
-            if (string.IsNullOrWhiteSpace(_environment.WebRootPath))
+            string storageConnectionString = "DefaultEndpointsProtocol=https;AccountName=amitash;AccountKey=J0FlDqtF3fGnzU6p7Bb9WgE/yft4ycRbCCcQ+qsrO9O7Eroet676YZBRYrs0Tuxz2e2RZP6MrGi1XS0P6t45Qw==;EndpointSuffix=core.windows.net";
+
+            if (CloudStorageAccount.TryParse(storageConnectionString, out var storageAccount))
             {
-                _environment.WebRootPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot");
-            }
-
-            var uploads = Path.Combine(_environment.WebRootPath, "uploads");
-
-            if (!Directory.Exists(uploads)) Directory.CreateDirectory(uploads);
-
-            if (file.Length > 0)
-            {
-                using (var fileStream = new FileStream(Path.Combine(uploads, file.FileName), FileMode.Create))
+                try
                 {
-                    await file.CopyToAsync(fileStream);
+                    CloudBlobClient cloudBlobClient = storageAccount.CreateCloudBlobClient();
+                    uploadBlob( file,  cloudBlobClient,
+                        isReference ? "referenceimage" : jobId);
+                }
+                catch (StorageException ex)
+                {
+                    Console.WriteLine("Error returned from the service: {0}", ex.Message);
                 }
             }
         }

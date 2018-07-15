@@ -9,9 +9,9 @@ namespace ImageUploadTest
         static void Main(string[] args)
         {
 
-            var filestream = File.OpenRead(@"C:\Users\a036540\Desktop\Shyamasundara Kudkuli.jpg");
+            var filestream = File.OpenRead(@"C:\Users\A056425\Desktop\front.jpeg");
             ApiService ap = new ApiService();
-            ap.UploadImageAsync(filestream, "shyam.jpg").Wait();
+            ap.UploadImageAsync(filestream, "front.jpeg").Wait();
 
         }
     }
