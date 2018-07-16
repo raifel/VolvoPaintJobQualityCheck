@@ -76,7 +76,7 @@ namespace ImageProcessing.Services
         /// <summary>
         /// Defines the replaceChannel
         /// </summary>
-        private readonly ReplaceChannel replaceChannel = new ReplaceChannel(RGB.R, null);
+        private readonly ReplaceChannel replaceChannel = new ReplaceChannel(RGB.R, new Bitmap(3,3));
 
         /// <summary>
         /// Defines the thresholdFilter
