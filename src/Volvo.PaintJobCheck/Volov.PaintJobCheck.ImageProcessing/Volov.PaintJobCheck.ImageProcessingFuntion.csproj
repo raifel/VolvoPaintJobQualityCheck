@@ -30,6 +30,6 @@
     <Folder Include="Properties\PublishProfiles\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\..\..\Users\a036540\Desktop\Volvo.PaintJobCheck.ImageProcessing\Volvo.PaintJobCheck.ImageProcessing.csproj" />
+    <ProjectReference Include="..\Volvo.PaintJobCheck.ImageProcessing\Volvo.PaintJobCheck.ImageProcessing.csproj" />
   </ItemGroup>
 </Project>
