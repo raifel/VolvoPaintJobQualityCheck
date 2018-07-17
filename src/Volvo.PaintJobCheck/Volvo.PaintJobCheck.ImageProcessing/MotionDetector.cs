@@ -6,7 +6,7 @@ using AForge.Imaging;
 using AForge.Imaging.Filters;
 using Image = System.Drawing.Image;
 
-namespace ImageProcessing.Services
+namespace Volvo.PaintJobCheck.ImageProcessing
 {
     /// <summary>
     /// Defines the <see cref="MotionDetector" />
@@ -76,7 +76,7 @@ namespace ImageProcessing.Services
         /// <summary>
         /// Defines the replaceChannel
         /// </summary>
-        private readonly ReplaceChannel replaceChannel = new ReplaceChannel(RGB.R, new Bitmap(3,3));
+        private readonly ReplaceChannel replaceChannel = new ReplaceChannel(RGB.R, null);
 
         /// <summary>
         /// Defines the thresholdFilter

@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Volov.PaintJobCheck.ImagePr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImageProcessingTest", "ImageProcessingTest\ImageProcessingTest.csproj", "{9F476AF6-8A15-47FC-902C-E122482F52B3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Volvo.PaintJobCheck.ImageProcessing", "..\..\..\..\..\Users\a036540\Desktop\Volvo.PaintJobCheck.ImageProcessing\Volvo.PaintJobCheck.ImageProcessing.csproj", "{BFFCC055-1C0E-4388-94F9-0AAB267AE5B0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Volvo.PaintJobCheck.ImageProcessing", "Volvo.PaintJobCheck.ImageProcessing\Volvo.PaintJobCheck.ImageProcessing.csproj", "{BFFCC055-1C0E-4388-94F9-0AAB267AE5B0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

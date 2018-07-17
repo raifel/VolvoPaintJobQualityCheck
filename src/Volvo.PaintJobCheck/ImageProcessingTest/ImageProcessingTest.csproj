@@ -50,12 +50,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\..\..\Users\a036540\Desktop\Volvo.PaintJobCheck.ImageProcessing\Volvo.PaintJobCheck.ImageProcessing.csproj">
-      <Project>{bffcc055-1c0e-4388-94f9-0aab267ae5b0}</Project>
-      <Name>Volvo.PaintJobCheck.ImageProcessing</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="images\1.jpg">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
