@@ -29,7 +29,7 @@ namespace Volvo.PaintJobCheck.WebApi.Controllers
             CloudStorageAccount storageAccount = null;
             CloudBlobContainer cloudBlobContainer = null;
 
-            string storageConnectionString = "DefaultEndpointsProtocol=https;AccountName=paintcheckimages;AccountKey=qhuiRPu8Dr0ZKQzz6f68I+H2kIX+TRlNKfUWQLZDJx64KJR+Nck143VjsTLESA9UMzZc1X+hFY033vTynXAMWg==;EndpointSuffix=core.windows.net";
+            string storageConnectionString = "DefaultEndpointsProtocol=https;AccountName=volvopaintjobstore;AccountKey=vJIvdg2K7AiqGYrlSloLbSCgPeQ5Aa+Csg8easpixGI7Kl1TqScQgJ89rY9cWcFP8jtAu8p1cTIRmmzB9N6gzw==;EndpointSuffix=core.windows.net";
 
             if (CloudStorageAccount.TryParse(storageConnectionString, out storageAccount))
             {
@@ -44,7 +44,7 @@ namespace Volvo.PaintJobCheck.WebApi.Controllers
                     await cloudBlobContainer.SetPermissionsAsync(permissions);
 
                     var directory = cloudBlobContainer.GetDirectoryReference(file.Headers["batchnumber"]);
-                    CloudBlockBlob blockBlob = directory.GetBlockBlobReference(file.Headers["serialNo"]+".jpg");
+                    CloudBlockBlob blockBlob = directory.GetBlockBlobReference(file.FileName);
                     await blockBlob.UploadFromStreamAsync(file.OpenReadStream());
 
                 }

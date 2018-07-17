@@ -1,0 +1,6 @@
+{
+    "IsEncrypted": false,
+    "Values": {
+        "AzureWebJobsStorage": "DefaultEndpointsProtocol=https;AccountName=volvopaintjobstore;AccountKey=vJIvdg2K7AiqGYrlSloLbSCgPeQ5Aa+Csg8easpixGI7Kl1TqScQgJ89rY9cWcFP8jtAu8p1cTIRmmzB9N6gzw==;EndpointSuffix=core.windows.net"
+    }
+}
